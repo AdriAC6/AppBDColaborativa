@@ -8,7 +8,7 @@ import java.util.List;
 
 import dto.RegistroConAlumnoDTO;
 import util.JbdcUtil;
-
+/**@author Ignacio R. */
 public class RegistroDAOImpl implements RegistroDAO {
 
     @Override
