@@ -16,6 +16,5 @@ public interface AlumnoDAO {
     public boolean actualizar(AlumnoDTO alumno);
 
     // Otros métodos
-    public void matricularAlumnos(List<AlumnoDTO> alumnos);
     public AlumnoDTO sortearAlumno();
 }

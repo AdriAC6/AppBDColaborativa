@@ -24,10 +24,6 @@ public class AlumnoDAOImpl implements AlumnoDAO {
          this.con = con; 
     }
 
-    /**    (non-Javadoc)
-     * Returns
-     * @see adat.ud2.sqlLite.bdColaborativa.dao.AlumnoDAO#listarTodos()
-     */
     @Override 
     public List<AlumnoDTO> listarTodos() {
         List<AlumnoDTO> alumnos = null;
@@ -141,32 +137,6 @@ public class AlumnoDAOImpl implements AlumnoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }
-    }
-
-    @Override
-    public void matricularAlumnos(List<AlumnoDTO> alumnos) {
-        try {
-            con.setAutoCommit(false);
-
-            // Ejecutar sentencias de la transacción
-            for (AlumnoDTO alumnoDTO : alumnos) {
-                if (insertar(alumnoDTO) < 0)
-                    throw new SQLException();
-            }
-
-            con.commit();
-        } catch (SQLException e) {
-            try {
-                con.rollback();
-            } catch (SQLException e1) {
-            }
-        } finally {
-            try {
-                con.setAutoCommit(true);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
     
