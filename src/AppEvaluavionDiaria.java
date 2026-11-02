@@ -7,7 +7,7 @@ import java.util.Scanner;
 import dao.AlumnoDAO;
 import dao.AlumnoDAOImpl;
 import dto.AlumnoDTO;
-import dto.RegistroConAlumnoDTO;
+//import dto.RegistroConAlumnoDTO;
 //import dto.RegistroDTO;
 import util.JbdcUtil;
 
@@ -42,8 +42,8 @@ public class AppEvaluavionDiaria {
                 System.out.println(alumnoElegido);
             }
             case 3 -> {
-            //    AlumnoDTO alumnoSinRegistro = sortearSinRegistros();
-              //  System.out.println(alumnoSinRegistro);
+                AlumnoDTO alumnoSinRegistro = alumnoDAO.sortearSinRegistros();
+                System.out.println(alumnoSinRegistro);
             }
             case 4 -> {
               //  List<RegistroConAlumnoDTO> registroConAlumno = listarConAlumno();
@@ -66,6 +66,6 @@ public class AppEvaluavionDiaria {
 
             default -> System.out.println("Opcion no valida");
         }
-        
+        sc.close();
     }
 }
