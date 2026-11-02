@@ -10,7 +10,7 @@ public class App {
         colaboradores.add("Ignacio M.");
         colaboradores.add("Samuel");
         colaboradores.add("Anxo");
-        colaboradores.add("Hugo");
+        colaboradores.add("Hugo D.");
         // Seguir añadiendo colaboradores
 
         System.out.println("Colaborador@s:");
