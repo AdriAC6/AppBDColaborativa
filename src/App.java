@@ -9,6 +9,7 @@ public class App {
         colaboradores.add("Amer");
         colaboradores.add("Ignacio M.");
         colaboradores.add("Samuel");
+        colaboradores.add("Anxo");
         colaboradores.add("Adrián Gómez");
         // Seguir añadiendo colaboradores
 
