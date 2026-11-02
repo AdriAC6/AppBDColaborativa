@@ -149,7 +149,7 @@ public class AlumnoDAOImpl implements AlumnoDAO {
     public AlumnoDTO sortearAlumno() {
         List<AlumnoDTO> alumnos = new ArrayList<>();
 
-        String sql = "SELECT * FROM Alumno";
+        String sql = "SELECT * FROM alumnos";
 
         try (Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)) {

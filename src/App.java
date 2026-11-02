@@ -1,7 +1,19 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
-        System.out.println("SOY AMIR HACIENDO CAMBIOS");
-        System.out.println("SEGUNDO CAMBIO AMER");
+        List<String> colaboradores = new ArrayList<>();
+
+        colaboradores.add("Óscar");
+        colaboradores.add("Amer");
+        colaboradores.add("Ignacio M.");
+        colaboradores.add("Samuel");
+        // Seguir añadiendo colaboradores
+
+        System.out.println("Colaborador@s:");
+        colaboradores.forEach(System.out::println);
     }
+
+
 }
