@@ -170,4 +170,45 @@ public class AlumnoDAOImpl implements AlumnoDAO {
 
         return alumnos.get(new Random().nextInt(alumnos.size()));
     }
+
+    /**
+     * Recupera todos los alumnos sin registros de la base de datos y devuelve uno al aleatorio.
+     * 
+     * @author Ignacio MR
+     */
+    @Override
+    public AlumnoDTO sortearSinRegistros() {
+        List<AlumnoDTO> alumnos = new ArrayList<>();
+        String sql = """
+                SELECT a.id, a.nombre, a.apellidos, a.curso
+                FROM alumnos a
+                WHERE NOT EXISTS (
+                    SELECT 1
+                    FROM registro_ejercicios r
+                    WHERE r.id_alumno = a.id
+                )
+                """;
+
+        try (Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                alumnos.add(new AlumnoDTO(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("apellidos"),
+                        rs.getString("curso")));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error sql: " + e.getMessage());
+        }
+
+        if (alumnos.isEmpty()) {
+            return null;
+        }
+
+        Collections.shuffle(alumnos);
+        return alumnos.getFirst();
+    }
 }

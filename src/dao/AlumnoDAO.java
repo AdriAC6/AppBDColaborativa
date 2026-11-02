@@ -17,4 +17,5 @@ public interface AlumnoDAO {
 
     // Otros métodos
     public AlumnoDTO sortearAlumno();
+    public AlumnoDTO sortearSinRegistros();
 }
