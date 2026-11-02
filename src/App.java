@@ -14,6 +14,7 @@ public class App {
         colaboradores.add("Adrián Gómez");
         colaboradores.add("Hugo D.");
         colaboradores.add("Adam");
+        colaboradores.add("Adrian Santos");
         // Seguir añadiendo colaboradores
 
         System.out.println("Colaborador@s:");
