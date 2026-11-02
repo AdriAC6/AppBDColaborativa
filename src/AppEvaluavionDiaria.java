@@ -38,8 +38,8 @@ public class AppEvaluavionDiaria {
              alumnos.forEach(System.out::println);
             }
             case 2 -> {
-              //  AlumnoDTO alumnoElegido = sortearAlumno();
-             //   System.out.println(alumnoElegido);
+                AlumnoDTO alumnoElegido = alumnoDAO.sortearAlumno();
+                System.out.println(alumnoElegido);
             }
             case 3 -> {
             //    AlumnoDTO alumnoSinRegistro = sortearSinRegistros();
