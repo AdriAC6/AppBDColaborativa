@@ -2,7 +2,9 @@ package dao;
 
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import dto.AlumnoDTO;
 
@@ -136,5 +138,36 @@ public class AlumnoDAOImpl implements AlumnoDAO {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    /**
+     * Recupera todos los alumnos de la base de datos y devuelve uno al aleatorio.
+     * 
+     * @author AmerCz
+     */
+    @Override
+    public AlumnoDTO sortearAlumno() {
+        List<AlumnoDTO> alumnos = new ArrayList<>();
+
+        String sql = "SELECT * FROM Alumno";
+
+        try (Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                alumnos.add(new AlumnoDTO(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("apellidos"),
+                        rs.getString("curso")));
+            }
+
+            Collections.shuffle(alumnos);
+
+        } catch (SQLException e) {
+            System.out.println("Error sql: " + e.getMessage());
+        }
+
+        return alumnos.get(new Random().nextInt(alumnos.size()));
     }
 }
