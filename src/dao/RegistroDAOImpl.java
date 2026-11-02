@@ -6,11 +6,43 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import dto.RegistroConAlumnoDTO;
 import util.JbdcUtil;
-/**@author Ignacio R. */
-public class RegistroDAOImpl implements RegistroDAO {
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
+import dto.RegistroConAlumnoDTO;
+import dto.RegistroDTO;
+
+public class RegistroDAOImpl implements RegistroDAO {
+    private Connection con;
+
+    public RegistroDAOImpl(Connection con) {
+        this.con = con; 
+    }
+
+    @Override
+    public boolean insertar(RegistroDTO registro) {
+        String sql = """
+            INSERT INTO registro_ejercicios (nombre, fecha, id_alumno, puntuacion)
+            VALUES (?, ?, ?, ?)
+        """;
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, registro.getNombre());
+            ps.setDate(2, Date.valueOf(registro.getFecha()));
+            ps.setInt(3, registro.getId_alumno());
+            ps.setInt(4, registro.getPuntuacion());
+
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error SQL: " + e.getMessage());
+
+            return false;
+        }
+    }
+  
+    /**@author Ignacio R. */  
     @Override
     public List<RegistroConAlumnoDTO> listarConAlumno() {
         String sql = """
@@ -18,9 +50,8 @@ public class RegistroDAOImpl implements RegistroDAO {
                 """;
 
         List<RegistroConAlumnoDTO> listaConAlumnos = new ArrayList<>();
-        try (Connection con = JbdcUtil.getConnection();
-                Statement stm = con.createStatement();
-                ResultSet rs = stm.executeQuery(sql);) {
+        try (Statement stm = con.createStatement();
+             ResultSet rs = stm.executeQuery(sql);) {
 
             while (rs.next()) {
                 listaConAlumnos.add(new RegistroConAlumnoDTO(
@@ -36,6 +67,6 @@ public class RegistroDAOImpl implements RegistroDAO {
             e.printStackTrace();
         }
         return listaConAlumnos;
-    }
-
+    }  
+    
 }
